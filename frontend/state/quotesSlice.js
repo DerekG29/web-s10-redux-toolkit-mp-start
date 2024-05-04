@@ -8,7 +8,7 @@ const quotesSlice = createSlice({
   initialState: {
     displayAllQuotes: true,
     highlightedQuote: null,
-    quotes: [
+    list: [
       {
         id: getNextId(),
         quoteText: "Don't cry because it's over, smile because it happened.",
