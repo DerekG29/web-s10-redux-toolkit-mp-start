@@ -42,7 +42,7 @@ export default function Quotes() {
           !quotes?.length && "No quotes here! Go write some."
         }
       </div>
-      {!!quotes?.length && <button onClick={() => dispatch(showAll)}>
+      {!!quotes?.length && <button onClick={() => dispatch(showAll())}>
         {displayAllQuotes ? 'HIDE' : 'SHOW'} FAKE QUOTES
       </button>}
     </div>
