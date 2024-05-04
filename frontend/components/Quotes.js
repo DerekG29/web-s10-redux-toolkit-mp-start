@@ -1,14 +1,18 @@
-import React from 'react'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  deleteQuote,
+  markFake,
+  setHighlighted,
+  showAll,
+} from '../state/quotesSlice';
 
 export default function Quotes() {
-  const quotes = [{ // ✨ `quotes` must come from the Redux store
-    id: 3,
-    quoteText: "Be yourself; everyone else is already taken.",
-    authorName: "Oscar Wilde",
-    apocryphal: false,
-  }]
-  const displayAllQuotes = true // ✨ `displayAllQuotes` must come from the Redux store
-  const highlightedQuote = 3 // ✨ `highlightedQuote` must come from the Redux store
+  const quotes = useSelector(st => st.quotes.list);
+  const displayAllQuotes = useSelector(st => st.quotes.displayAllQuotes);
+  const highlightedQuote = useSelector(st => st.quotes.highlightedQuote);
+  const dispatch = useDispatch();
 
   return (
     <div id="quotes">
@@ -27,9 +31,9 @@ export default function Quotes() {
                 <div>{qt.quoteText}</div>
                 <div>{qt.authorName}</div>
                 <div className="quote-buttons">
-                  <button onClick={() => {/* ✨ dispatch an action */ }}>DELETE</button>
-                  <button onClick={() => {/* ✨ dispatch an action */ }}>HIGHLIGHT</button>
-                  <button onClick={() => {/* ✨ dispatch an action */ }}>FAKE</button>
+                  <button onClick={() => {() => dispatch(deleteQuote(qt.id))}}>DELETE</button>
+                  <button onClick={() => {() => dispatch(setHighlighted(qt.id))}}>HIGHLIGHT</button>
+                  <button onClick={() => {() => dispatch(markFake(qt.id))}}>FAKE</button>
                 </div>
               </div>
             ))
@@ -38,7 +42,7 @@ export default function Quotes() {
           !quotes?.length && "No quotes here! Go write some."
         }
       </div>
-      {!!quotes?.length && <button onClick={() => {/* ✨ dispatch an action */ }}>
+      {!!quotes?.length && <button onClick={() => dispatch(showAll)}>
         {displayAllQuotes ? 'HIDE' : 'SHOW'} FAKE QUOTES
       </button>}
     </div>
