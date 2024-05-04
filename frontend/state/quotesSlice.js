@@ -30,11 +30,26 @@ const quotesSlice = createSlice({
     ],
   },
   reducers: {
-    deleteQuote(state, action) { },
     createQuote(state, action) { },
-    markFake(state, action) { },
-    setHighlighted(state, action) { },
-    showAll(state) { },
+    deleteQuote(state, action) {
+      const id = action.payload;
+      state.list = state.list.filter(qt => qt.id !== id);
+    },
+    markFake(state, action) {
+      const id = action.payload;
+      const target = state.list.find(qt => qt.id === id);
+      target.apocryphal = !target.apocryphal;
+    },
+    setHighlighted(state, action) {
+      const id = action.payload;
+      const highlighted = state.highlightedQuote;
+      state.highlightedQuote = id === highlighted
+        ? null
+        : id;
+    },
+    showAll(state) {
+      state.displayAllQuotes = !state.displayAllQuotes;
+    },
   },
 });
 
