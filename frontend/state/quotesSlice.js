@@ -30,7 +30,20 @@ const quotesSlice = createSlice({
     ],
   },
   reducers: {
-    createQuote(state, action) { },
+    createQuote: {
+      prepare({ authorName, quoteText }) {
+        const newQuote = {
+          id: getNextId(),
+          quoteText,
+          authorName,
+          apocryphal: false,
+        } 
+        return { payload: newQuote };
+      },
+      reducer(state, action) {
+        state.list.push(action.payload);
+      },
+    },
     deleteQuote(state, action) {
       const id = action.payload;
       state.list = state.list.filter(qt => qt.id !== id);
