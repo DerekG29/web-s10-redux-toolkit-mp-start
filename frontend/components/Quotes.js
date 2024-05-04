@@ -31,9 +31,9 @@ export default function Quotes() {
                 <div>{qt.quoteText}</div>
                 <div>{qt.authorName}</div>
                 <div className="quote-buttons">
-                  <button onClick={() => {() => dispatch(deleteQuote(qt.id))}}>DELETE</button>
-                  <button onClick={() => {() => dispatch(setHighlighted(qt.id))}}>HIGHLIGHT</button>
-                  <button onClick={() => {() => dispatch(markFake(qt.id))}}>FAKE</button>
+                  <button onClick={() => dispatch(deleteQuote(qt.id))}>DELETE</button>
+                  <button onClick={() => dispatch(setHighlighted(qt.id))}>HIGHLIGHT</button>
+                  <button onClick={() => dispatch(markFake(qt.id))}>FAKE</button>
                 </div>
               </div>
             ))
